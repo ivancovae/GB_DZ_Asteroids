@@ -53,9 +53,9 @@ namespace HW_Asteroids
             _objs = new BaseObject[5];
             _objs[0] = LoadObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), TypeObject.Background);
             _objs[1] = LoadObject(new Point(Game.Width / 2 - 200, 20), new Point(0, 0), new Size(400, 200), TypeObject.Logo);
-            _objs[2] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 - 25), new Point(Game._random.Next(1, 5), 0), new Size(200, 50), TypeObject.ButtonStart);
-            _objs[3] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 + 50 - 25), new Point(Game._random.Next(1, 5), 0), new Size(200, 50), TypeObject.ButtonRecord);
-            _objs[4] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 + 100 - 25), new Point(Game._random.Next(1, 5), 0), new Size(200, 50), TypeObject.ButtonExit);
+            _objs[2] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 - 25), new Point(1, 0), new Size(200, 50), TypeObject.ButtonStart);
+            _objs[3] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 + 50 - 25), new Point(2, 0), new Size(200, 50), TypeObject.ButtonRecord);
+            _objs[4] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 + 100 - 25), new Point(3, 0), new Size(200, 50), TypeObject.ButtonExit);
         }
 
         public void Draw()
