@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace HW_Asteroids
 {
@@ -14,7 +15,7 @@ namespace HW_Asteroids
             Alien00 = 5,
             Alien01 = 6
         };
-        public static Random _random;
+
         public static BaseObject[] _objs;
 
         private BaseObject LoadObject(Point pos, Point dir, Size size, TypeObject type)
@@ -57,33 +58,15 @@ namespace HW_Asteroids
             }
             return obj;
         }
-
-        private Point GenerateRandomPointOnScreen()
-        {
-            var posX = _random.Next(0, Game.Width);
-            var posY = _random.Next(0, Game.Height);
-            return new Point(posX, posY);
-        }
-        private Point GenerateRandomDir(int maxDir = 5)
-        {
-            var dirX = _random.Next(1, maxDir);
-            return new Point(dirX, 0);
-        }
-        private Size GenerateRandomSize(int min = 10, int max = 30)
-        {
-            var size = _random.Next(min, max); ;
-            return new Size(size, size);
-        }
-
+        
         public void Load()
-        {
-            _random = new Random();            
+        {            
             _objs = new BaseObject[31];
             _objs[0] = LoadObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), TypeObject.Background);
 
             for (int i = 1; i < _objs.Length; i++)
             {
-                _objs[i] = LoadObject(GenerateRandomPointOnScreen(), GenerateRandomDir(), GenerateRandomSize(), (TypeObject)_random.Next(1, 7));
+                _objs[i] = LoadObject(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(), (TypeObject)Game._random.Next(1, 7));
             }
           
         }
@@ -97,6 +80,10 @@ namespace HW_Asteroids
         {
             foreach (BaseObject obj in _objs)
                 obj.Update();
+        }
+        public void CheckMouseClick(MouseEventArgs e)
+        {
+            Point mousePt = new Point(e.X, e.Y);
         }
     }
 }

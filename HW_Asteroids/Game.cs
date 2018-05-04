@@ -11,6 +11,7 @@ namespace HW_Asteroids
         // Свойства
         public static int Width { get; set; }
         public static int Height { get; set; }
+        public static Random _random;
 
         public static IScreenState _currentScreen;
 
@@ -30,8 +31,9 @@ namespace HW_Asteroids
             // Связываем буфер в памяти с графическим объектом
             // для того, чтобы рисовать в буфере
             Buffer = _context.Allocate(graphics, new Rectangle(0, 0, Width, Height));
+            _random = new Random();
 
-            _currentScreen = new GameScreen();
+            _currentScreen = new MainMenuScreen();
 
             Load();
             // для обеспечения 60 кадров в секунду - 60 срабатываний за 1000(1 секунда) 
@@ -39,6 +41,36 @@ namespace HW_Asteroids
             Timer timer = new Timer { Interval = 16 };
             timer.Start();
             timer.Tick += Timer_Tick;
+
+            form.MouseUp += new MouseEventHandler(Form_MouseUp);
+        }
+
+        private static void Form_MouseUp(object sender, MouseEventArgs e)
+        {
+            _currentScreen.CheckMouseClick(e);
+        }
+
+        public static void changeScreen()
+        {
+            _currentScreen = new GameScreen();
+            _currentScreen.Load();
+        }
+
+        public static Point GenerateRandomPointOnScreen()
+        {
+            var posX = _random.Next(0, Width);
+            var posY = _random.Next(0, Height);
+            return new Point(posX, posY);
+        }
+        public static Point GenerateRandomDir(int maxDir = 5)
+        {
+            var dirX = _random.Next(1, maxDir);
+            return new Point(dirX, 0);
+        }
+        public static Size GenerateRandomSize(int min = 10, int max = 30)
+        {
+            var size = _random.Next(min, max); ;
+            return new Size(size, size);
         }
 
         public static void Draw()
