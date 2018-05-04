@@ -18,7 +18,9 @@ namespace HW_Asteroids
         public override void Update()
         {
             Pos.X = Pos.X - Dir.X;
-            if (Pos.X < -Size.Width) Pos.X = Game.Width + Size.Width;
+            var min = Game.Width / 4;
+            var max = Game.Width / 2;
+            if (Pos.X < min || Pos.X > max) Dir.X = - Dir.X;
         }
         public virtual bool CheckContains(Point mousePoint)
         {
