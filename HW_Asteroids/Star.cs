@@ -18,7 +18,11 @@ namespace HW_Asteroids
         public override void Update()
         {
             Pos.X = Pos.X - Dir.X;
-            if (Pos.X < -Size.Width) Pos.X = Game.Width + Size.Width;
+            if (Pos.X < -Size.Width)
+            {
+                Pos.X = Game.Width + Size.Width;
+                Pos.Y = Game._random.Next(0, Game.Height);
+            }
         }
     }
 }
