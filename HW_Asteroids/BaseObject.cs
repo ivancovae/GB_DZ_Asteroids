@@ -3,34 +3,50 @@ using System.Drawing;
 
 namespace HW_Asteroids
 {
-    class BaseObject
+    /// <summary>
+    /// Базовый класс сущности объект на сцене
+    /// </summary>
+    abstract class BaseObject
     {
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
         protected Image _image;
+        protected string Tag;
 
-        public BaseObject(Point pos, Point dir, Size size, Image image)
+        /// <summary>
+        /// Базовый конструктор инициализации объекта
+        /// </summary>
+        /// <param name="pos">Позиция объекта(левый верхний край) на экране</param>
+        /// <param name="dir">Вектор направления движения на экране</param>
+        /// <param name="size">Размер объекта на экране</param>
+        /// <param name="tag">Название или тэг объекта</param>
+        public BaseObject(Point pos, Point dir, Size size, string tag)
         {
             Pos = pos;
             Dir = dir;
             Size = size;
-            _image = image;
+            Tag = tag;
+            LoadImage();
         }
 
+        /// <summary>
+        /// Абстрактная функция инициализации изображения объекта
+        /// </summary>
+        public abstract void LoadImage();
+        /// <summary>
+        /// Виртуальный метод отрисовки объекта при новом цикле приложения
+        /// </summary>
         public virtual void Draw()
         {
-            Game.Buffer.Graphics.DrawImage(_image, Pos.X, Pos.Y, Size.Width, Size.Height);
-        }
-
-        public virtual void Update()
-        {
-            Pos.X = Pos.X - Dir.X;
-            if (Pos.X < -Size.Width)
+            if (_image != null)
             {
-                Pos.X = Game.Width + Size.Width;
-                Pos.Y = Game._random.Next(0, Game.Height);
+                Game.Buffer.Graphics.DrawImage(_image, Pos.X, Pos.Y, Size.Width, Size.Height);
             }
         }
+        /// <summary>
+        /// Абстрактная функция обновленая объекта при новом цикле приложения
+        /// </summary>
+        public abstract void Update();
     }
 }

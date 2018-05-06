@@ -6,14 +6,14 @@ namespace HW_Asteroids
 {
     class Alien : BaseObject
     {
-        public Alien(Point pos, Point dir, Size size, Image image) : base(pos, dir, size, image)
+        public Alien(Point pos, Point dir, Size size, string tag) : base(pos, dir, size, tag)
         {
 
         }
-
-        public override void Draw()
+        
+        public override void LoadImage()
         {
-            Game.Buffer.Graphics.DrawImage(_image, Pos.X, Pos.Y, Size.Width, Size.Height);
+            _image = Properties.Resources.alien_1;
         }
 
         public override void Update()

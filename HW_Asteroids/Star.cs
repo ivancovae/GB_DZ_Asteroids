@@ -5,14 +5,14 @@ namespace HW_Asteroids
 {
     class Star : BaseObject
     {
-        public Star(Point pos, Point dir, Size size, Image image) : base(pos, dir, size, image)
+        public Star(Point pos, Point dir, Size size, string tag) : base(pos, dir, size, tag)
         {
 
         }
 
-        public override void Draw()
+        public override void LoadImage()
         {
-            Game.Buffer.Graphics.DrawImage(_image, Pos.X, Pos.Y, Size.Width, Size.Height);
+            
         }
 
         public override void Update()

@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alien.cs" />
+    <Compile Include="BackgroundObject.cs" />
     <Compile Include="BaseObject.cs" />
+    <Compile Include="Bullet.cs" />
     <Compile Include="ButtonObject.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameScreen.cs" />

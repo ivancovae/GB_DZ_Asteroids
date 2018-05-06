@@ -5,16 +5,11 @@ namespace HW_Asteroids
 {
     class ButtonObject : BaseObject
     {
-        public ButtonObject(Point pos, Point dir, Size size, Image image) : base(pos, dir, size, image)
+        public ButtonObject(Point pos, Point dir, Size size, string tag) : base(pos, dir, size, tag)
         {
 
         }
-
-        public override void Draw()
-        {
-            Game.Buffer.Graphics.DrawImage(_image, Pos.X, Pos.Y, Size.Width, Size.Height);
-        }
-
+        
         public override void Update()
         {
             Pos.X = Pos.X - Dir.X;
@@ -34,6 +29,22 @@ namespace HW_Asteroids
             // думаю либо от класса кнопки наследовать разные классы кнопок
             // или добавить название кнопки и делегат на событие
             Game.changeScreen();
+        }
+
+        public override void LoadImage()
+        {
+            if (Tag == "Button_Start")
+            {
+                _image = Properties.Resources.btnStart;
+            }
+            if (Tag == "Button_Record")
+            {
+                _image = Properties.Resources.btnRecord;
+            }
+            if (Tag == "Button_Exit")
+            {
+                _image = Properties.Resources.btnExit;
+            }
         }
     }
 }
