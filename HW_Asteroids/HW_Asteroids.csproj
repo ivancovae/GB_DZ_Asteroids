@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alien.cs" />
+    <Compile Include="Asteroid.cs" />
     <Compile Include="BackgroundObject.cs" />
     <Compile Include="BaseObject.cs" />
     <Compile Include="Bullet.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameScreen.cs" />
     <Compile Include="IScreenState.cs" />
+    <Compile Include="LogoObject.cs" />
     <Compile Include="MainMenuScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

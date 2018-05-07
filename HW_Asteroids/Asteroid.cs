@@ -3,22 +3,26 @@ using System.Drawing;
 
 namespace HW_Asteroids
 {
-    class Star : BaseObject
+    class Asteroid : BaseObject
     {
-        public Star(Point pos, Point dir, Size size, string tag) : base(pos, dir, size, tag)
+        public Asteroid(Point pos, Point dir, Size size, string tag) : base(pos, dir, size, tag)
         {
 
         }
 
         public override void LoadImage()
         {
-            if (Tag == "Star00")
+            if (Tag == "Meteor00")
             {
-                _image = Properties.Resources.star_1;
+                _image = Properties.Resources.meteor_1;
             }
-            if (Tag == "Star01")
+            if (Tag == "Meteor01")
             {
-                _image = Properties.Resources.star_2;
+                _image = Properties.Resources.meteor_2;
+            }
+            if (Tag == "Meteor02")
+            {
+                _image = Properties.Resources.meteor_3;
             }
         }
 

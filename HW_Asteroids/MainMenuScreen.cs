@@ -23,24 +23,24 @@ namespace HW_Asteroids
             {
                 case TypeObject.Background:
                     {
-                        obj = new BaseObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), Properties.Resources.space_01);
+                        obj = new BackgroundObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), "Space01");
                     } break;
                 case TypeObject.Logo:
                     {
-                        obj = new BaseObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.bckgLogoSpace);
+                        obj = new LogoObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Logo00");
                     }
                     break;
                 case TypeObject.ButtonStart:
                     {
-                        obj = new ButtonObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.btnStart);
+                        obj = new ButtonObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Button_Start");
                     } break;
                 case TypeObject.ButtonRecord:
                     {
-                        obj = new ButtonObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.btnRecord);
+                        obj = new ButtonObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Button_Record");
                     } break;
                 case TypeObject.ButtonExit:
                     {
-                        obj = new ButtonObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.btnExit);
+                        obj = new ButtonObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Button_Exit");
                     } break;
                 default:
                     break;

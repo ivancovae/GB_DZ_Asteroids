@@ -25,32 +25,32 @@ namespace HW_Asteroids
             {
                 case TypeObject.Background:
                     {
-                        obj = new BaseObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), Properties.Resources.space_00);
+                        obj = new BackgroundObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), "Space00");
                     } break;
                 case TypeObject.Meteor00:
                     {
-                        obj = new BaseObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.meteor_1);
+                        obj = new Asteroid(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Meteor00");
                     } break;
                 case TypeObject.Meteor01:
                     {
-                        obj = new BaseObject(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.meteor_3);
+                        obj = new Asteroid(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Meteor02");
                     } break;
                 case TypeObject.Star00:
                     {
-                        obj = new Star(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.star_1);
+                        obj = new Star(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Star00");
                     } break;
                 case TypeObject.Star01:
                     {
-                        obj = new Star(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.star_2);
+                        obj = new Star(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Star01");
                     } break;
                 case TypeObject.Alien00:
                     {
-                        obj = new Alien(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.alien_1);
+                        obj = new Alien(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Alien00");
                     }
                     break;
                 case TypeObject.Alien01:
                     {
-                        obj = new Alien(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), Properties.Resources.alien_2);
+                        obj = new Alien(new Point(pos.X, pos.Y), new Point(dir.X, dir.Y), new Size(size.Width, size.Height), "Alien01");
                     }
                     break;
                 default:

@@ -13,7 +13,14 @@ namespace HW_Asteroids
         
         public override void LoadImage()
         {
-            _image = Properties.Resources.alien_1;
+            if (Tag == "Alien00")
+            {
+                _image = Properties.Resources.alien_1;
+            }
+            if (Tag == "Alien01")
+            {
+                _image = Properties.Resources.alien_2;
+            }
         }
 
         public override void Update()
