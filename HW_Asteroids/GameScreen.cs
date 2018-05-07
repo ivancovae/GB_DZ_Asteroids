@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace HW_Asteroids
 {
     class GameScreen : IScreenState
-    {        
+    {
         private static List<BaseObject> _neitralObjects = new List<BaseObject>();
         private static List<BaseObject> _enemiesObjects = new List<BaseObject>();
         private static List<BaseObject> _friendlyObjects = new List<BaseObject>();
@@ -23,14 +23,19 @@ namespace HW_Asteroids
             // Враждебные объекты
             for (int i = 0; i < 10; i++)
             {
+                BaseObject asteroid = null;
                 try
                 {
-                    var asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(10, 50), "Meteor0" + Game._random.Next(0, 2).ToString());
-                    _enemiesObjects.Add(asteroid);
+                    asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(0, 2), "Meteor0" + Game._random.Next(0, 2).ToString());
                 }
                 catch (GameObjectSizeException gose)
                 {
                     MessageBox.Show(gose.Message + Environment.NewLine + gose.gameObject.Tag, "Error");
+                    asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(20, 50), "Meteor0" + Game._random.Next(0, 2).ToString());
+                }
+                finally
+                {
+                    _enemiesObjects.Add(asteroid);
                 }
             }
             for (int i = 0; i < 10; i++)
@@ -57,10 +62,13 @@ namespace HW_Asteroids
             foreach (BaseObject obj in _enemiesObjects)
             {
                 obj.Update();
-                if(obj.isCollision(_friendlyObjects[0]))
+                if (_friendlyObjects.Count > 0)
                 {
-                    obj.Respown();
-                    _friendlyObjects[0].Respown();
+                    if (obj.isCollision(_friendlyObjects[0]))
+                    {
+                        obj.Respown();
+                        _friendlyObjects[0].Respown();
+                    }
                 }
             }
             foreach (BaseObject obj in _friendlyObjects)
