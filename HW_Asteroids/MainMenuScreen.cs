@@ -4,8 +4,14 @@ using System.Windows.Forms;
 
 namespace HW_Asteroids
 {
+    /// <summary>
+    /// Класс объекта экрана меню
+    /// </summary>
     class MainMenuScreen : IScreenState
     {
+        /// <summary>
+        /// Перечисление типов объектов сцены
+        /// </summary>
         public enum TypeObject
         {
             Background = 0,
@@ -15,6 +21,9 @@ namespace HW_Asteroids
             ButtonExit = 4
         };
 
+        /// <summary>
+        /// Объекты на сцене
+        /// </summary>
         public static BaseObject[] _objs;
         private BaseObject LoadObject(Point pos, Point dir, Size size, TypeObject type)
         {
@@ -47,7 +56,9 @@ namespace HW_Asteroids
             }
             return obj;
         }
-
+        /// <summary>
+        /// Метод загузки ресурсов выбранного экрана
+        /// </summary>
         public void Load()
         {
             _objs = new BaseObject[5];
@@ -57,19 +68,26 @@ namespace HW_Asteroids
             _objs[3] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 + 50 - 25), new Point(2, 0), new Size(200, 50), TypeObject.ButtonRecord);
             _objs[4] = LoadObject(new Point(Game.Width / 2 - 100, Game.Height / 2 + 100 - 25), new Point(3, 0), new Size(200, 50), TypeObject.ButtonExit);
         }
-
+        /// <summary>
+        /// Метод отрисовки выбранного экрана
+        /// </summary>
         public void Draw()
         {
             foreach (BaseObject obj in _objs)
                 obj.Draw();
         }
-
+        /// <summary>
+        /// Метод обновления объектов выбранного экрана
+        /// </summary>
         public void Update()
         {
             foreach (BaseObject obj in _objs)
                 obj.Update();
         }
-
+        /// <summary>
+        /// Проверка точки клика на экране
+        /// </summary>
+        /// <param name="e">событие клика мышкой</param>
         public void CheckMouseClick(MouseEventArgs e)
         {
             Point mousePt = new Point(e.X, e.Y);

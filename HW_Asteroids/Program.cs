@@ -12,20 +12,8 @@ namespace HW_Asteroids
                 Width = Screen.PrimaryScreen.Bounds.Width,
                 Height = Screen.PrimaryScreen.Bounds.Height
             };
-            try
-            {
-                Game.Init(form);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                MessageBox.Show(e.Message, "Error");
-            }
-            finally
-            {
-                form.Width = 800;
-                form.Height = 600;
-                Game.Init(form);
-            }
+
+            Game.Init(form);            
             form.Show();
             Game.Load();            
             Game.Draw();

@@ -5,12 +5,17 @@ using System.Collections.Generic;
 
 namespace HW_Asteroids
 {
+    /// <summary>
+    /// Класс объекта игрового экрана
+    /// </summary>
     class GameScreen : IScreenState
     {
         private static List<BaseObject> _neitralObjects = new List<BaseObject>();
         private static List<BaseObject> _enemiesObjects = new List<BaseObject>();
         private static List<BaseObject> _friendlyObjects = new List<BaseObject>();
-        
+        /// <summary>
+        /// Метод загузки ресурсов выбранного экрана
+        /// </summary>
         public void Load()
         {
             // Нейтральные объекты
@@ -45,6 +50,9 @@ namespace HW_Asteroids
             // Полезные объекты
             _friendlyObjects.Add(new Bullet(new Point(0, Game._random.Next(0, Game.Height)), new Point(20, 0), new Size(10, 5), "Bullet0" + Game._random.Next(0, 2).ToString()));
         }
+        /// <summary>
+        /// Метод отрисовки выбранного экрана
+        /// </summary>
         public void Draw()
         {
             foreach (BaseObject obj in _neitralObjects)
@@ -54,7 +62,9 @@ namespace HW_Asteroids
             foreach (BaseObject obj in _friendlyObjects)
                 obj.Draw();
         }
-
+        /// <summary>
+        /// Метод обновления объектов выбранного экрана
+        /// </summary>
         public void Update()
         {
             foreach (BaseObject obj in _neitralObjects)
@@ -66,14 +76,18 @@ namespace HW_Asteroids
                 {
                     if (obj.isCollision(_friendlyObjects[0]))
                     {
-                        obj.Respown();
-                        _friendlyObjects[0].Respown();
+                        obj.Respawn();
+                        _friendlyObjects[0].Respawn();
                     }
                 }
             }
             foreach (BaseObject obj in _friendlyObjects)
                 obj.Update();
         }
+        /// <summary>
+        /// Проверка точки клика на экране
+        /// </summary>
+        /// <param name="e">событие клика мышкой</param>
         public void CheckMouseClick(MouseEventArgs e)
         {
             Point mousePt = new Point(e.X, e.Y);

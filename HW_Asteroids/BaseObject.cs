@@ -14,8 +14,13 @@ namespace HW_Asteroids
         protected Image _image;
         protected string _tag;
 
+        /// <summary>
+        /// Свойство названия тэга
+        /// </summary>
         public string Tag => _tag.ToString();
-
+        /// <summary>
+        /// Прямоугольник объекта(от точки Pos до точки Pos + Size)
+        /// </summary>
         public Rectangle Frame => new Rectangle(Pos, Size);
 
         /// <summary>
@@ -57,8 +62,15 @@ namespace HW_Asteroids
         /// </summary>
         public abstract void Update();
 
+        /// <summary>
+        /// Реализация интерфейса проверки столкновения
+        /// </summary>
+        /// <param name="obj">объект, пересечение с которым проверяем</param>
+        /// <returns></returns>
         public bool isCollision(ICollision obj) => obj.Frame.IntersectsWith(Frame);
-
-        public virtual void Respown() {}
+        /// <summary>
+        /// Метод "оживления" базового объекта
+        /// </summary>
+        public virtual void Respawn() { }
     }
 }
