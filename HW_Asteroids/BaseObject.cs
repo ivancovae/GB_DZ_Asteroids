@@ -6,13 +6,17 @@ namespace HW_Asteroids
     /// <summary>
     /// Базовый класс сущности объект на сцене
     /// </summary>
-    abstract class BaseObject
+    abstract class BaseObject : ICollision
     {
         protected Point Pos;
         protected Point Dir;
         protected Size Size;
         protected Image _image;
-        protected string Tag;
+        protected string _tag;
+
+        public string Tag => _tag.ToString();
+
+        public Rectangle Frame => new Rectangle(Pos, Size);
 
         /// <summary>
         /// Базовый конструктор инициализации объекта
@@ -23,10 +27,14 @@ namespace HW_Asteroids
         /// <param name="tag">Название или тэг объекта</param>
         public BaseObject(Point pos, Point dir, Size size, string tag)
         {
+            _tag = tag;
             Pos = pos;
             Dir = dir;
+            if(size.Width <= 0 || size.Height <= 0)
+            {
+                throw new GameObjectSizeException("Размер объекта не может быть меньше 0", this);
+            }
             Size = size;
-            Tag = tag;
             LoadImage();
         }
 
@@ -48,5 +56,9 @@ namespace HW_Asteroids
         /// Абстрактная функция обновленая объекта при новом цикле приложения
         /// </summary>
         public abstract void Update();
+
+        public bool isCollision(ICollision obj) => obj.Frame.IntersectsWith(Frame);
+
+        public virtual void Respown() {}
     }
 }

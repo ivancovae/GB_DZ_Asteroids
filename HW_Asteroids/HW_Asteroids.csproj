@@ -50,7 +50,9 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="ButtonObject.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameObjectSizeException.cs" />
     <Compile Include="GameScreen.cs" />
+    <Compile Include="ICollision.cs" />
     <Compile Include="IScreenState.cs" />
     <Compile Include="LogoObject.cs" />
     <Compile Include="MainMenuScreen.cs" />
@@ -145,6 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bckgLogoSpace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

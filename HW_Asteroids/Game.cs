@@ -8,9 +8,39 @@ namespace HW_Asteroids
     {
         private static BufferedGraphicsContext _context;
         public static BufferedGraphics Buffer;
+        private static int _width;
+        private static int _height;
         // Свойства
-        public static int Width { get; set; }
-        public static int Height { get; set; }
+        public static int Width
+        {
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Ширина");
+                if (value > 1000)
+                    throw new ArgumentOutOfRangeException("Ширина");
+                _width = value;
+            }
+        }
+        public static int Height
+        {
+            get
+            {
+                return _height;
+            }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Высота");
+                if (value > 1000)
+                    throw new ArgumentOutOfRangeException("Высота");
+                _height = value;
+            }
+        }
         public static Random _random;
 
         public static IScreenState _currentScreen;
@@ -25,6 +55,7 @@ namespace HW_Asteroids
             //  буферу графического контекства для текущего приложения
             _context = BufferedGraphicsManager.Current;
             graphics = form.CreateGraphics(); // Создаем объект - поверхность рисования и связываем его с формой
+
             // Запоминаем размеры формы
             Width = form.Width;
             Height = form.Height;
@@ -35,7 +66,6 @@ namespace HW_Asteroids
 
             _currentScreen = new MainMenuScreen();
 
-            Load();
             // для обеспечения 60 кадров в секунду - 60 срабатываний за 1000(1 секунда) 
             // 1000 / 60 = 16,(6) для плавности интервал нужен 16
             Timer timer = new Timer { Interval = 16 };

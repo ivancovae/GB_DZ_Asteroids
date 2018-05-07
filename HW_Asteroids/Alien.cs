@@ -29,9 +29,13 @@ namespace HW_Asteroids
             Pos.Y = Pos.Y + Convert.ToInt32(Math.Sin(Pos.X/6)*5);
             if (Pos.X < -Size.Width)
             {
-                Pos.X = Game.Width + Size.Width;
-                Pos.Y = Game._random.Next(0, Game.Height);
+                Respown();
             }
+        }
+        public override void Respown()
+        {
+            Pos.X = Game.Width + Size.Width;
+            Pos.Y = Game._random.Next(0, Game.Height);
         }
     }
 }
