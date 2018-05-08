@@ -4,23 +4,23 @@ using System.Drawing;
 namespace HW_Asteroids
 {
     /// <summary>
-    /// Класс объекта пули
+    /// Класс пули
     /// </summary>
     class Bullet : BaseObject
     {
         /// <summary>
-        /// Конструктор создания объекта пули
+        /// Конструктор создания пули
         /// </summary>
-        /// <param name="pos">объект позиции</param>
-        /// <param name="dir">объект направления</param>
-        /// <param name="size">объект размера</param>
-        /// <param name="tag">тег или название группы</param>
+        /// <param name="pos">позиция, левый верхний край</param>
+        /// <param name="dir">направление движения объекта</param>
+        /// <param name="size">размер объекта, ширина и высота</param>
+        /// <param name="tag">тег пули, нужен для выбора вида пули</param>
         public Bullet(Point pos, Point dir, Size size, string tag) : base(pos, dir, size, tag)
         {
 
         }
         /// <summary>
-        /// Переопределение метода загрузки картинки по тэгу
+        /// Загрузка изображения пули по тэгу
         /// </summary>
         public override void LoadImage()
         {
@@ -34,7 +34,7 @@ namespace HW_Asteroids
             }
         }
         /// <summary>
-        /// Метод поведения астеройда на экране
+        /// Обновление позиции и динамики пули на экране
         /// </summary>
         public override void Update()
         {
@@ -45,7 +45,7 @@ namespace HW_Asteroids
             }
         }
         /// <summary>
-        /// Метод "оживления" пули
+        /// Перерождение пули
         /// </summary>
         public override void Respawn()
         {

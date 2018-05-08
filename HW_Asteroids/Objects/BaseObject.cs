@@ -9,20 +9,19 @@ namespace HW_Asteroids
     abstract class BaseObject : ICollision
     {
         protected Point Pos;
-        protected Point Dir;
         protected Size Size;
         protected Image _image;
-        protected string _tag;
-
         /// <summary>
         /// Свойство названия тэга
         /// </summary>
         public string Tag => _tag.ToString();
+        protected string _tag;
         /// <summary>
         /// Прямоугольник объекта(от точки Pos до точки Pos + Size)
         /// </summary>
         public Rectangle Frame => new Rectangle(Pos, Size);
 
+        protected Point Dir;
         /// <summary>
         /// Базовый конструктор инициализации объекта
         /// </summary>
@@ -35,6 +34,8 @@ namespace HW_Asteroids
             _tag = tag;
             Pos = pos;
             Dir = dir;
+            // to do убрать после домашнего задания
+            // проверка должна быть не через исключения, а проверкой и заданием минимального размера, например (1px)х(1px)
             if(size.Width <= 0 || size.Height <= 0)
             {
                 throw new GameObjectSizeException("Размер объекта не может быть меньше 0", this);
@@ -45,10 +46,11 @@ namespace HW_Asteroids
 
         /// <summary>
         /// Абстрактная функция инициализации изображения объекта
+        /// Вызывается в базовом конструкторе, инициализирует изображение объекта по тэгу
         /// </summary>
         public abstract void LoadImage();
         /// <summary>
-        /// Виртуальный метод отрисовки объекта при новом цикле приложения
+        /// Виртуальный метод отрисовки объекта при новом цикле игры
         /// </summary>
         public virtual void Draw()
         {
@@ -58,7 +60,7 @@ namespace HW_Asteroids
             }
         }
         /// <summary>
-        /// Абстрактная функция обновленая объекта при новом цикле приложения
+        /// Абстрактная функция обновления объекта при новом цикле игры
         /// </summary>
         public abstract void Update();
 
