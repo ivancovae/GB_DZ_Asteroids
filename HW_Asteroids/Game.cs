@@ -28,9 +28,7 @@ namespace HW_Asteroids
             }
             set
             {
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException("Ширина");
-                if (value > 1000)
+                if (value < 0 || value > 1000)
                     throw new ArgumentOutOfRangeException("Ширина");
                 _width = value;
             }
@@ -46,9 +44,7 @@ namespace HW_Asteroids
             }
             set
             {
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException("Высота");
-                if (value > 1000)
+                if (value < 0 || value > 1000)
                     throw new ArgumentOutOfRangeException("Высота");
                 _height = value;
             }
