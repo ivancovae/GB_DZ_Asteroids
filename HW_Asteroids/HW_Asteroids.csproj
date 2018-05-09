@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\GameObjectException.cs" />
     <Compile Include="Objects\Enemies\Alien.cs" />
     <Compile Include="Objects\Enemies\Asteroid.cs" />
     <Compile Include="Objects\BackgroundObject.cs" />
