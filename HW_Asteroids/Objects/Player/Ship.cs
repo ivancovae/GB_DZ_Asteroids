@@ -9,6 +9,7 @@ namespace HW_Asteroids
     /// </summary>
     class Ship : BaseObject
     {
+        public static event Message MessageDie;
         private int _energy = 100;
         private Timer _cooldown = new Timer() { Interval = 1000, Enabled = false };
         /// <summary>
@@ -104,7 +105,7 @@ namespace HW_Asteroids
         /// </summary>
         public void Die()
         {
-
+            MessageDie?.Invoke();
         }
     }
 }

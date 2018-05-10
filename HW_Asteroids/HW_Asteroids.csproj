@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\GameObjectException.cs" />
     <Compile Include="GameScreens\GameOverScreen.cs" />
+    <Compile Include="Objects\Bonus\FirstKit.cs" />
     <Compile Include="Objects\Enemies\Alien.cs" />
     <Compile Include="Objects\Enemies\Asteroid.cs" />
     <Compile Include="Objects\BackgroundObject.cs" />

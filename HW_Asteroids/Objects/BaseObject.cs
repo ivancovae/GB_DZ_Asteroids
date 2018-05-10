@@ -8,6 +8,7 @@ namespace HW_Asteroids
     /// </summary>
     abstract class BaseObject : ICollision
     {
+        public delegate void Message();
         protected Point Pos;
         protected Size Size;
         protected Image _image;

@@ -27,6 +27,7 @@ namespace HW_Asteroids
         private void TimerLife_Elapsed(object sender, ElapsedEventArgs e)
         {
             _timerAlive.Enabled = false;
+            _timerAlive.Stop();
         }
 
         /// <summary>

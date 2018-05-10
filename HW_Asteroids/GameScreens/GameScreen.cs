@@ -10,10 +10,11 @@ namespace HW_Asteroids
     /// </summary>
     class GameScreen : IScreenState
     {
+        private static int _score = 0;
         private static Ship _ship;
-        private static List<BaseObject> _neitralObjects = new List<BaseObject>();
-        private static List<BaseObject> _enemiesObjects = new List<BaseObject>();
-        private static List<BaseObject> _bullets = new List<BaseObject>();
+        private static List<BaseObject> _neitralObjects = new List<BaseObject>(30);
+        private static List<BaseObject> _enemiesObjects = new List<BaseObject>(30);
+        private static List<BaseObject> _bullets = new List<BaseObject>(30);
         /// <summary>
         /// Метод загузки ресурсов выбранного экрана
         /// </summary>
@@ -21,6 +22,7 @@ namespace HW_Asteroids
         {
             // Корабль
             _ship = new Ship(new Point(10, Game.Height / 2), new Point(0, 5), new Size(40, 40), "Ship0" + Game._random.Next(0, 3).ToString());
+            Ship.MessageDie += Ship_MessageDie;
 
             // Нейтральные объекты
             _neitralObjects.Add(new BackgroundObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), "Space00"));
@@ -54,6 +56,12 @@ namespace HW_Asteroids
             // Полезные объекты
             //_friendlyObjects.Add(new Bullet(new Point(0, Game._random.Next(0, Game.Height)), new Point(20, 0), new Size(10, 5), "Bullet0" + Game._random.Next(0, 2).ToString()));
         }
+
+        private void Ship_MessageDie()
+        {
+            Game.changeScreen(new GameOverScreen());
+        }
+
         /// <summary>
         /// Метод отрисовки выбранного экрана
         /// </summary>
@@ -68,6 +76,7 @@ namespace HW_Asteroids
             _ship.Draw();
 
             Game.Buffer.Graphics.DrawString($"Energy: " + _ship.Energy, SystemFonts.DefaultFont, Brushes.White, 0, 0);
+            Game.Buffer.Graphics.DrawString($"Score: " + _score, SystemFonts.DefaultFont, Brushes.White, 0, 20);
         }
         /// <summary>
         /// Метод обновления объектов выбранного экрана
@@ -87,6 +96,7 @@ namespace HW_Asteroids
                         {
                             enemy.Respawn();
                             _bullets.Remove(bullet);
+                            _score++;
                         }
                     }
                 }
@@ -97,15 +107,15 @@ namespace HW_Asteroids
                     enemy.Respawn();
                 }
             }
-            foreach (BaseObject obj in _bullets.ToArray())
+            foreach (BaseObject bullet in _bullets.ToArray())
             {
-                obj.Update();
-                if(obj is Bullet)
+                bullet.Update();
+                if(bullet is Bullet)
                 {
-                    var temp = obj as Bullet;
+                    var temp = bullet as Bullet;
                     if(!temp.IsAlive)
                     {
-                        _bullets.Remove(obj);
+                        _bullets.Remove(bullet);
                     }
                 }
             }
