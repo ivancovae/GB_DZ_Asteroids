@@ -91,18 +91,20 @@ namespace HW_Asteroids
         public void CheckMouseClick(MouseEventArgs e)
         {
             Point mousePt = new Point(e.X, e.Y);
-            foreach (BaseObject obj in _objs)
+            if (e.Button == MouseButtons.Left)
             {
-                if (obj is ButtonObject)
+                foreach (BaseObject obj in _objs)
                 {
-                    var btn = (obj as ButtonObject);
-                    if (btn.CheckContains(mousePt))
+                    if (obj is ButtonObject)
                     {
-                        btn.Action();
+                        var btn = (obj as ButtonObject);
+                        if (btn.CheckContains(mousePt))
+                        {
+                            btn.Action();
+                        }
                     }
                 }
-            }
-            
+            }            
         }
         /// <summary>
         /// Обработка нажатия клавиши

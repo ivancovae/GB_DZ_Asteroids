@@ -79,7 +79,7 @@ namespace HW_Asteroids
         /// </summary>
         public void MoveDown()
         {
-            if (Pos.Y < Game.Height - Size.Height) Pos.Y += Dir.Y;
+            if (Pos.Y + Size.Height < Game.Height - Size.Height) Pos.Y += Dir.Y;
         }
         /// <summary>
         /// Генерация выстрела

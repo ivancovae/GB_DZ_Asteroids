@@ -21,6 +21,7 @@ namespace HW_Asteroids
         {
             // Корабль
             _ship = new Ship(new Point(10, Game.Height / 2), new Point(0, 5), new Size(40, 40), "Ship0" + Game._random.Next(0, 3).ToString());
+
             // Нейтральные объекты
             _neitralObjects.Add(new BackgroundObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), "Space00"));
             for (int i = 0; i < 20; i++)
@@ -65,6 +66,8 @@ namespace HW_Asteroids
             foreach (BaseObject obj in _bullets)
                 obj.Draw();
             _ship.Draw();
+
+            Game.Buffer.Graphics.DrawString($"Energy: " + _ship.Energy, SystemFonts.DefaultFont, Brushes.White, 0, 0);
         }
         /// <summary>
         /// Метод обновления объектов выбранного экрана
@@ -86,11 +89,12 @@ namespace HW_Asteroids
                             _bullets.Remove(bullet);
                         }
                     }
+                }
 
-                    if (enemy.isCollision(_ship))
-                    {
-                        _ship.EnergyLow(10);
-                    }
+                if (enemy.isCollision(_ship))
+                {
+                    _ship.EnergyLow(10);
+                    enemy.Respawn();
                 }
             }
             foreach (BaseObject obj in _bullets.ToArray())
