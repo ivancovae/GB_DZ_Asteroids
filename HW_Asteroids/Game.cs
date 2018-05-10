@@ -14,45 +14,26 @@ namespace HW_Asteroids
         /// Буфер графики
         /// </summary>
         public static BufferedGraphics Buffer;
-        private static int _width;
-        private static int _height;
         // Свойства
         /// <summary>
         /// Свойство ширины активной области
         /// </summary>
-        public static int Width
-        {
-            get
-            {
-                return _width;
-            }
-            set
-            {
-                if (value < 0 || value > 1000)
-                    throw new ArgumentOutOfRangeException("Ширина");
-                _width = value;
-            }
-        }
+        public static int Width { get; set; }
         /// <summary>
         /// Свойство высоты активной области
         /// </summary>
-        public static int Height
-        {
-            get
-            {
-                return _height;
-            }
-            set
-            {
-                if (value < 0 || value > 1000)
-                    throw new ArgumentOutOfRangeException("Высота");
-                _height = value;
-            }
-        }
+        public static int Height { get; set; }
         /// <summary>
         /// Объект генератор случайных чисел
         /// </summary>
         public static Random _random;
+
+        /// <summary>
+        /// Таймер обновления
+        /// </summary>
+        // для обеспечения 60 кадров в секунду - 60 срабатываний за 1000(1 секунда) 
+        // 1000 / 60 = 16,(6) для плавности интервал нужен 16
+        private static Timer _timer = new Timer { Interval = 16 };
 
         /// <summary>
         /// Текущий сцена, которая управляет перерисовкой
@@ -74,18 +55,10 @@ namespace HW_Asteroids
             _context = BufferedGraphicsManager.Current;
             graphics = form.CreateGraphics(); // Создаем объект - поверхность рисования и связываем его с формой
 
-            try
-            {
-                // Запоминаем размеры формы
-                Width = form.Width;
-                Height = form.Height;
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                MessageBox.Show(e.Message, "Error");
-                Width = 800;
-                Height = 600;
-            }
+            // Запоминаем размеры формы
+            Width = form.Width;
+            Height = form.Height;
+            
             // Связываем буфер в памяти с графическим объектом
             // для того, чтобы рисовать в буфере
             Buffer = _context.Allocate(graphics, new Rectangle(0, 0, Width, Height));
@@ -93,14 +66,18 @@ namespace HW_Asteroids
 
             _currentScreen = new MainMenuScreen();
 
-            // для обеспечения 60 кадров в секунду - 60 срабатываний за 1000(1 секунда) 
-            // 1000 / 60 = 16,(6) для плавности интервал нужен 16
-            Timer timer = new Timer { Interval = 16 };
-            timer.Start();
-            timer.Tick += Timer_Tick;
+            _timer.Start();
+            _timer.Tick += Timer_Tick;
 
-            form.MouseUp += new MouseEventHandler(Form_MouseUp);
+            form.MouseUp += Form_MouseUp;
+            form.KeyDown += Form_KeyDown;
         }
+
+        private static void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            _currentScreen.KeyDown(e);
+        }
+
         private static void Form_MouseUp(object sender, MouseEventArgs e)
         {
             _currentScreen.CheckMouseClick(e);
@@ -109,9 +86,9 @@ namespace HW_Asteroids
         /// <summary>
         /// Метод переключения текущей сцены, обеспечивает переход между объектами сцен
         /// </summary>
-        public static void changeScreen()
+        public static void changeScreen(IScreenState scene)
         {
-            _currentScreen = new GameScreen();
+            _currentScreen = scene;
             _currentScreen.Load();
         }
 

@@ -104,5 +104,10 @@ namespace HW_Asteroids
             }
             
         }
+
+        public void KeyDown(KeyEventArgs e)
+        {
+            
+        }
     }
 }

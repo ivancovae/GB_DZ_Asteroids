@@ -9,8 +9,8 @@ namespace HW_Asteroids
         {
             Form form = new Form
             {
-                Width = Screen.PrimaryScreen.Bounds.Width,
-                Height = Screen.PrimaryScreen.Bounds.Height
+                Width = 800,//Width = Screen.PrimaryScreen.Bounds.Width,
+                Height = 600//Height = Screen.PrimaryScreen.Bounds.Height
             };
 
             Game.Init(form);            

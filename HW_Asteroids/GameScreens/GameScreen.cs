@@ -10,14 +10,17 @@ namespace HW_Asteroids
     /// </summary>
     class GameScreen : IScreenState
     {
+        private static Ship _ship;
         private static List<BaseObject> _neitralObjects = new List<BaseObject>();
         private static List<BaseObject> _enemiesObjects = new List<BaseObject>();
-        private static List<BaseObject> _friendlyObjects = new List<BaseObject>();
+        private static List<BaseObject> _bullets = new List<BaseObject>();
         /// <summary>
         /// Метод загузки ресурсов выбранного экрана
         /// </summary>
         public void Load()
         {
+            // Корабль
+            _ship = new Ship(new Point(10, Game.Height / 2), new Point(0, 5), new Size(40, 40), "Ship0" + Game._random.Next(0, 3).ToString());
             // Нейтральные объекты
             _neitralObjects.Add(new BackgroundObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), "Space00"));
             for (int i = 0; i < 20; i++)
@@ -31,7 +34,7 @@ namespace HW_Asteroids
                 BaseObject asteroid = null;
                 try
                 {
-                    asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(0, 2), "Meteor0" + Game._random.Next(0, 2).ToString());
+                    asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(20, 50), "Meteor0" + Game._random.Next(0, 2).ToString());
                 }
                 catch (GameObjectSizeException gose)
                 {
@@ -48,7 +51,7 @@ namespace HW_Asteroids
                 _enemiesObjects.Add(new Alien(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(), "Alien0" + Game._random.Next(0, 2).ToString()));
             }
             // Полезные объекты
-            _friendlyObjects.Add(new Bullet(new Point(0, Game._random.Next(0, Game.Height)), new Point(20, 0), new Size(10, 5), "Bullet0" + Game._random.Next(0, 2).ToString()));
+            //_friendlyObjects.Add(new Bullet(new Point(0, Game._random.Next(0, Game.Height)), new Point(20, 0), new Size(10, 5), "Bullet0" + Game._random.Next(0, 2).ToString()));
         }
         /// <summary>
         /// Метод отрисовки выбранного экрана
@@ -59,8 +62,9 @@ namespace HW_Asteroids
                 obj.Draw();
             foreach (BaseObject obj in _enemiesObjects)
                 obj.Draw();
-            foreach (BaseObject obj in _friendlyObjects)
+            foreach (BaseObject obj in _bullets)
                 obj.Draw();
+            _ship.Draw();
         }
         /// <summary>
         /// Метод обновления объектов выбранного экрана
@@ -69,20 +73,39 @@ namespace HW_Asteroids
         {
             foreach (BaseObject obj in _neitralObjects)
                 obj.Update();
-            foreach (BaseObject obj in _enemiesObjects)
+            foreach (BaseObject enemy in _enemiesObjects.ToArray())
             {
-                obj.Update();
-                if (_friendlyObjects.Count > 0)
+                enemy.Update();
+                if (_bullets.Count > 0)
                 {
-                    if (obj.isCollision(_friendlyObjects[0]))
+                    foreach (BaseObject bullet in _bullets.ToArray())
                     {
-                        obj.Respawn();
-                        _friendlyObjects[0].Respawn();
+                        if (enemy.isCollision(bullet))
+                        {
+                            enemy.Respawn();
+                            _bullets.Remove(bullet);
+                        }
+                    }
+
+                    if (enemy.isCollision(_ship))
+                    {
+                        _ship.EnergyLow(10);
                     }
                 }
             }
-            foreach (BaseObject obj in _friendlyObjects)
+            foreach (BaseObject obj in _bullets.ToArray())
+            {
                 obj.Update();
+                if(obj is Bullet)
+                {
+                    var temp = obj as Bullet;
+                    if(!temp.IsAlive)
+                    {
+                        _bullets.Remove(obj);
+                    }
+                }
+            }
+                
         }
         /// <summary>
         /// Проверка точки клика на экране
@@ -91,6 +114,30 @@ namespace HW_Asteroids
         public void CheckMouseClick(MouseEventArgs e)
         {
             Point mousePt = new Point(e.X, e.Y);
+        }
+
+        public void KeyDown(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Space:
+                    {
+                        BaseObject bullet = _ship.PressFire();
+                        if (bullet != null)
+                            _bullets.Add(bullet);
+                    }
+                    break;
+                case Keys.Up:
+                    {
+                        _ship.MoveUp();
+                    }
+                    break;
+                case Keys.Down:
+                    {
+                        _ship.MoveDown();
+                    }
+                    break;
+            }
         }
     }
 }

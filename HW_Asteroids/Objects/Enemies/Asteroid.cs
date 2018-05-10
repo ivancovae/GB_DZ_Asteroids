@@ -6,12 +6,12 @@ namespace HW_Asteroids
     /// <summary>
     /// Класс объекта Астеройд
     /// </summary>
-    class Asteroid : BaseObject, ICloneable
+    class Asteroid : BaseObject, ICloneable, IComparable<Asteroid>
     {
         /// <summary>
         /// Свойство мощности астеройда
         /// </summary>
-        public int Power { get; set; }
+        public int Power { get; set; } = 3;
         /// <summary>
         /// Конструктор создания объекта астеройд
         /// </summary>
@@ -57,12 +57,7 @@ namespace HW_Asteroids
         /// Клонирование объекта
         /// </summary>
         /// <returns>копия объекта</returns>
-        public object Clone()
-        {
-            var clone = new Asteroid(new Point(Pos.X, Pos.Y), new Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height), Tag.Clone() as string);
-            clone.Power = Power;
-            return clone;
-        }
+        public object Clone() => new Asteroid(new Point(Pos.X, Pos.Y), new Point(Dir.X, Dir.Y), new Size(Size.Width, Size.Height), Tag.Clone() as string) { Power = Power };
         /// <summary>
         /// Метод "оживления" астеройда
         /// </summary>
@@ -70,6 +65,16 @@ namespace HW_Asteroids
         {
             Pos.X = Game.Width + Size.Width;
             Pos.Y = Game._random.Next(0, Game.Height);
+        }
+
+        int IComparable<Asteroid>.CompareTo(Asteroid other)
+        {
+            if (Power > other.Power)
+                return 1;
+            if (Power < other.Power)
+                return -1;
+            else
+                return 0;
         }
     }
 }
