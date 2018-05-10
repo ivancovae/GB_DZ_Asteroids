@@ -104,7 +104,9 @@ namespace HW_Asteroids
             }
             
         }
-
+        /// <summary>
+        /// Обработка нажатия клавиши
+        /// </summary>
         public void KeyDown(KeyEventArgs e)
         {
             

@@ -116,6 +116,10 @@ namespace HW_Asteroids
             Point mousePt = new Point(e.X, e.Y);
         }
 
+        /// <summary>
+        /// Обработка нажатия клавиши
+        /// </summary>
+        /// <param name="e"></param>
         public void KeyDown(KeyEventArgs e)
         {
             switch (e.KeyCode)
