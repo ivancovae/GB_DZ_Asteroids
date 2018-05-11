@@ -9,6 +9,7 @@ namespace HW_Asteroids
     /// </summary>
     class GameOverScreen : IScreenState
     {
+        public static BaseObject[] _objs;
         public void CheckMouseClick(MouseEventArgs e)
         {
             
@@ -18,7 +19,10 @@ namespace HW_Asteroids
         /// </summary>
         public void Draw()
         {
-            
+            foreach (BaseObject obj in _objs)
+                obj.Draw();
+
+            Game.Buffer.Graphics.DrawString($"Game Over", SystemFonts.DefaultFont, Brushes.White, Game.Width / 2, Game.Height / 2);
         }
         /// <summary>
         /// Обработка нажатия клавиши
@@ -32,14 +36,16 @@ namespace HW_Asteroids
         /// </summary>
         public void Load()
         {
-            
+            _objs = new BaseObject[1];
+            _objs[0] = new BackgroundObject(new Point(0, 0), new Point(0, 0), new Size(Game.Width, Game.Height), "Space01");
         }
         /// <summary>
         /// Метод обновления объектов выбранного экрана
         /// </summary>
         public void Update()
         {
-            
+            foreach (BaseObject obj in _objs)
+                obj.Update();
         }
     }
 }

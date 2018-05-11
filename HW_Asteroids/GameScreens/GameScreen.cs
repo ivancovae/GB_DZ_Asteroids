@@ -91,6 +91,7 @@ namespace HW_Asteroids
                             enemy.Respawn();
                             _bullets.Remove(bullet);
                             _score++;
+                            Log.AddMessage($"Пуля {bullet.Tag} уничтожила {enemy.Tag}");
                         }
                     }
                 }
@@ -99,6 +100,7 @@ namespace HW_Asteroids
                 {
                     _ship.EnergyLow(10);
                     enemy.Respawn();
+                    Log.AddMessage($"Корабль поврежден объектом {enemy.Tag}");
                 }
             }
             foreach (BaseObject bonus in _bonuses.ToArray())
@@ -108,6 +110,7 @@ namespace HW_Asteroids
                 {
                     _ship.GetBonus(bonus);
                     bonus.Respawn();
+                    Log.AddMessage($"Корабль получил бонус {bonus.Tag}");
                 }
             }
             foreach (BaseObject bullet in _bullets.ToArray())
@@ -118,6 +121,7 @@ namespace HW_Asteroids
                     var temp = bullet as Bullet;
                     if(!temp.IsAlive)
                     {
+                        Log.AddMessage($"Дальность полета пули привышена {bullet.Tag}");
                         _bullets.Remove(bullet);
                     }
                 }

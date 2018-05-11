@@ -10,16 +10,19 @@ namespace HW_Asteroids
     {
         private static List<string> messages = new List<string>();
 
+        // оставил для прошлого варианта, переделал через обобщенный делегат
         /// <summary>
         /// Делегат добавления нового сообщения с передачей времени добавления
         /// </summary>
         /// <param name="message">сообщение</param>
         /// <param name="time">время добавления сообщения</param>
-        public delegate void ChangeMessage(string message, DateTime time);
+        //public delegate void ChangeMessage(string message, DateTime time);
+
+
         /// <summary>
-        /// событие изменения журнала
+        /// событие изменения журнала, через обобщенный делегат
         /// </summary>
-        public static event ChangeMessage OnChangeMessage;
+        public static event Action<string, DateTime> OnChangeMessage;
         /// <summary>
         /// Добавление сообщения в журнал
         /// </summary>
