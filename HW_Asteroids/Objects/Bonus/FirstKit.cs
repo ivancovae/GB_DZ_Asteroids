@@ -6,8 +6,10 @@ namespace HW_Asteroids
     /// <summary>
     /// Класс объекта аптечка
     /// </summary>
-    class FirstKit : BaseObject
+    class FirstKit : BaseObject, ICollision
     {
+        private int healingPoint = 10;
+        public int HealingPoint => healingPoint;
         /// <summary>
         /// Конструктор создания объект аптечка
         /// </summary>
@@ -23,7 +25,10 @@ namespace HW_Asteroids
         /// </summary>
         public override void LoadImage()
         {
-            
+            if (Tag == "Energy00")
+            {
+                _image = Properties.Resources.power_up_4;
+            }
         }
         /// <summary>
         /// Метод поведения аптечки на экране

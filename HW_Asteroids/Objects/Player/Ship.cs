@@ -30,6 +30,15 @@ namespace HW_Asteroids
             }
         }
 
+        public void GetBonus(BaseObject bonus)
+        {
+            if(bonus is FirstKit)
+            {
+                var firstKit = bonus as FirstKit;
+                _energy += firstKit.HealingPoint;
+            }
+        }
+
         /// <summary>
         /// Конструктор создания объекта корабль
         /// </summary>

@@ -12,9 +12,10 @@ namespace HW_Asteroids
     {
         private static int _score = 0;
         private static Ship _ship;
-        private static List<BaseObject> _neitralObjects = new List<BaseObject>(30);
-        private static List<BaseObject> _enemiesObjects = new List<BaseObject>(30);
-        private static List<BaseObject> _bullets = new List<BaseObject>(30);
+        private static List<BaseObject> _neitralObjects = new List<BaseObject>(0);
+        private static List<BaseObject> _enemiesObjects = new List<BaseObject>(0);
+        private static List<BaseObject> _bullets = new List<BaseObject>(0);
+        private static List<BaseObject> _bonuses = new List<BaseObject>(0);
         /// <summary>
         /// Метод загузки ресурсов выбранного экрана
         /// </summary>
@@ -34,27 +35,18 @@ namespace HW_Asteroids
             // Враждебные объекты
             for (int i = 0; i < 10; i++)
             {
-                BaseObject asteroid = null;
-                try
-                {
-                    asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(20, 50), "Meteor0" + Game._random.Next(0, 2).ToString());
-                }
-                catch (GameObjectSizeException gose)
-                {
-                    MessageBox.Show(gose.Message + Environment.NewLine + gose.gameObject.Tag, "Error");
-                    asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(20, 50), "Meteor0" + Game._random.Next(0, 2).ToString());
-                }
-                finally
-                {
-                    _enemiesObjects.Add(asteroid);
-                }
+                BaseObject asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(20, 50), "Meteor0" + Game._random.Next(0, 2).ToString());
+                _enemiesObjects.Add(asteroid);
             }
             for (int i = 0; i < 10; i++)
             {
                 _enemiesObjects.Add(new Alien(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(), "Alien0" + Game._random.Next(0, 2).ToString()));
             }
-            // Полезные объекты
-            //_friendlyObjects.Add(new Bullet(new Point(0, Game._random.Next(0, Game.Height)), new Point(20, 0), new Size(10, 5), "Bullet0" + Game._random.Next(0, 2).ToString()));
+            
+            for (int i = 0; i < 5; i++)
+            {
+                _bonuses.Add(new FirstKit(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), new Size(20, 20), "Energy0" + Game._random.Next(0, 1).ToString()));
+            }
         }
 
         private void Ship_MessageDie()
@@ -72,6 +64,8 @@ namespace HW_Asteroids
             foreach (BaseObject obj in _enemiesObjects)
                 obj.Draw();
             foreach (BaseObject obj in _bullets)
+                obj.Draw();
+            foreach (BaseObject obj in _bonuses)
                 obj.Draw();
             _ship.Draw();
 
@@ -105,6 +99,15 @@ namespace HW_Asteroids
                 {
                     _ship.EnergyLow(10);
                     enemy.Respawn();
+                }
+            }
+            foreach (BaseObject bonus in _bonuses.ToArray())
+            {
+                bonus.Update();
+                if (bonus.isCollision(_ship))
+                {
+                    _ship.GetBonus(bonus);
+                    bonus.Respawn();
                 }
             }
             foreach (BaseObject bullet in _bullets.ToArray())
