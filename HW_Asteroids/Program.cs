@@ -8,6 +8,7 @@ namespace HW_Asteroids
         static void Main(string[] args)
         {
             Log.OnChangeMessage += ChangeMessage;
+            FileLog.Start();
             Form form = new Form
             {
                 Width = 800,//Width = Screen.PrimaryScreen.Bounds.Width,

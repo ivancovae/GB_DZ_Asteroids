@@ -94,6 +94,8 @@ namespace HW_Asteroids
             Log.AddMessage($"Загрузка сцены");
             _currentScreen.Load();
             Log.AddMessage($"Загрузка сцены завершена");
+            FileLog.Stop();
+            Log.AddMessage($"Запись в файл прекращена");
         }
 
         /// <summary>
