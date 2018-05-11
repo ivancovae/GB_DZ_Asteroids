@@ -30,6 +30,10 @@ namespace HW_Asteroids
             }
         }
 
+        /// <summary>
+        /// Обработка бонуса
+        /// </summary>
+        /// <param name="bonus">объект бонуса, могут быть с разными целями</param>
         public void GetBonus(BaseObject bonus)
         {
             if(bonus is FirstKit)
