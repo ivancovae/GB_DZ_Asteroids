@@ -50,18 +50,6 @@ namespace HW_Asteroids
         public override void Update()
         {
             Pos.X = Pos.X + Dir.X;
-            //if (Pos.X > Game.Width + Size.Width)
-            //{
-            //    Respawn();
-            //}
-        }
-        /// <summary>
-        /// Перерождение пули
-        /// </summary>
-        public override void Respawn()
-        {
-            Pos.X = 0;
-            Pos.Y = Game._random.Next(0, Game.Height);
         }
     }
 }

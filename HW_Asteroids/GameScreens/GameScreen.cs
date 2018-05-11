@@ -35,8 +35,7 @@ namespace HW_Asteroids
             // Враждебные объекты
             for (int i = 0; i < 10; i++)
             {
-                BaseObject asteroid = new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(20, 50), "Meteor0" + Game._random.Next(0, 2).ToString());
-                _enemiesObjects.Add(asteroid);
+                _enemiesObjects.Add(new Asteroid(Game.GenerateRandomPointOnScreen(), Game.GenerateRandomDir(), Game.GenerateRandomSize(20, 50), "Meteor0" + Game._random.Next(0, 2).ToString()));
             }
             for (int i = 0; i < 10; i++)
             {
