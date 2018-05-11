@@ -7,6 +7,7 @@ namespace HW_Asteroids
     {
         static void Main(string[] args)
         {
+            Log.OnChangeMessage += ChangeMessage;
             Form form = new Form
             {
                 Width = 800,//Width = Screen.PrimaryScreen.Bounds.Width,
@@ -18,6 +19,11 @@ namespace HW_Asteroids
             Game.Load();            
             Game.Draw();
             Application.Run(form);
+        }
+
+        private static void ChangeMessage(string message, DateTime time)
+        {
+            Console.WriteLine($"{time}: {message}");
         }
     }
 }

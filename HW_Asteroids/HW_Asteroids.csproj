@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{475FACD6-CA52-4856-A61A-2565006761F0}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HW_Asteroids</RootNamespace>
     <AssemblyName>HW_Asteroids</AssemblyName>
@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,6 +56,7 @@
     <Compile Include="Objects\Enemies\Asteroid.cs" />
     <Compile Include="Objects\BackgroundObject.cs" />
     <Compile Include="Objects\BaseObject.cs" />
+    <Compile Include="Objects\Log.cs" />
     <Compile Include="Objects\Player\Bullet.cs" />
     <Compile Include="Objects\Player\Ship.cs" />
     <Compile Include="Objects\UI\ButtonObject.cs" />

@@ -48,6 +48,7 @@ namespace HW_Asteroids
         /// <param name="form">объект формы</param>
         public static void Init(Form form)
         {
+            Log.AddMessage($"Загрузка объектов");
             // Графическое устройство для вывода графики
             Graphics graphics;
             // Предоставляет доступ к главному 
@@ -71,6 +72,7 @@ namespace HW_Asteroids
 
             form.MouseUp += Form_MouseUp;
             form.KeyDown += Form_KeyDown;
+            Log.AddMessage($"Загрузка объектов завершена");
         }
 
         private static void Form_KeyDown(object sender, KeyEventArgs e)
@@ -89,7 +91,9 @@ namespace HW_Asteroids
         public static void changeScreen(IScreenState scene)
         {
             _currentScreen = scene;
+            Log.AddMessage($"Загрузка сцены");
             _currentScreen.Load();
+            Log.AddMessage($"Загрузка сцены завершена");
         }
 
         /// <summary>
