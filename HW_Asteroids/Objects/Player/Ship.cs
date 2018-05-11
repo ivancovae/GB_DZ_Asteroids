@@ -40,6 +40,8 @@ namespace HW_Asteroids
             {
                 var firstKit = bonus as FirstKit;
                 _energy += firstKit.HealingPoint;
+                if (_energy > 100)
+                    _energy = 100;
             }
         }
 
