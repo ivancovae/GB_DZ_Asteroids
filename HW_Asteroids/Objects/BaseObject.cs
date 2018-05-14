@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 
 namespace HW_Asteroids
 {
@@ -12,6 +13,10 @@ namespace HW_Asteroids
         protected Point Pos;
         protected Size Size;
         protected Image _image;
+        /// <summary>
+        /// Свойство состояния видимости и взаимодействия объекта
+        /// </summary>
+        public bool IsShow { get; set; } = true;
         /// <summary>
         /// Свойство названия тэга
         /// </summary>
@@ -74,6 +79,10 @@ namespace HW_Asteroids
         /// <summary>
         /// Метод "оживления" базового объекта
         /// </summary>
-        public virtual void Respawn() { }
+        public virtual void Respawn(Point newPoint)
+        {
+            Pos = newPoint;
+            IsShow = true;
+        }
     }
 }

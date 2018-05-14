@@ -100,12 +100,12 @@ namespace HW_Asteroids
         /// <summary>
         /// Генерация выстрела
         /// </summary>
-        public Bullet PressFire()
+        public Point? PressFire()
         {
             if (!_cooldown.Enabled)
             {
                 _cooldown.Enabled = true;
-                return new Bullet(new Point(Pos.X + Size.Width, Pos.Y + Size.Height / 2), new Point(Dir.X + 3, Dir.Y), new Size(10, 5), "Bullet0" + Game._random.Next(0, 2).ToString());
+                return new Point(Pos.X + Size.Width, Pos.Y + Size.Height / 2);
             }
             return null;
         }

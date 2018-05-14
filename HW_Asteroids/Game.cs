@@ -109,6 +109,16 @@ namespace HW_Asteroids
             return new Point(posX, posY);
         }
         /// <summary>
+        /// Метод генерации случайной точки за экраном
+        /// </summary>
+        /// <returns></returns>
+        public static Point GenerateRandomPointBehindScreen()
+        {
+            var posX = Width + _random.Next(0, Width);
+            var posY = _random.Next(50, Height - 50);
+            return new Point(posX, posY);
+        }
+        /// <summary>
         /// Генерация случайного направления для противника
         /// </summary>
         /// <param name="maxDir">объект точка направления</param>

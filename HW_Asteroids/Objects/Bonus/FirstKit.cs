@@ -38,17 +38,16 @@ namespace HW_Asteroids
             Pos.X = Pos.X - Dir.X;
             if (Pos.X < -Size.Width)
             {
-                Respawn();
+                Respawn(new Point(Game.Width + Size.Width, Game._random.Next(0, Game.Height)));
             }
         }
 
         /// <summary>
         /// Метод "оживления" аптечки
         /// </summary>
-        public override void Respawn()
+        public override void Respawn(Point newPoint)
         {
-            Pos.X = Game.Width + Size.Width;
-            Pos.Y = Game._random.Next(0, Game.Height);
+            base.Respawn(newPoint);
         }
     }
 }

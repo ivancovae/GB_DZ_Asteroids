@@ -21,13 +21,14 @@ namespace HW_Asteroids
         public Bullet(Point pos, Point dir, Size size, string tag) : base(pos, dir, size, tag)
         {
             _timerAlive.Elapsed += TimerLife_Elapsed;
-            _timerAlive.Enabled = true;
+            _timerAlive.Start();
+            IsShow = false;
         }
 
         private void TimerLife_Elapsed(object sender, ElapsedEventArgs e)
         {
-            _timerAlive.Enabled = false;
             _timerAlive.Stop();
+            IsShow = false;
         }
 
         /// <summary>
@@ -50,6 +51,16 @@ namespace HW_Asteroids
         public override void Update()
         {
             Pos.X = Pos.X + Dir.X;
+        }
+
+        /// <summary>
+        /// Метод "оживления" пули
+        /// </summary>
+        public override void Respawn(Point newPoint)
+        {
+            base.Respawn(newPoint);
+            _timerAlive.Start();
+            IsShow = true;
         }
     }
 }

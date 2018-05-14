@@ -45,16 +45,15 @@ namespace HW_Asteroids
             Pos.Y = Pos.Y + Convert.ToInt32(Math.Sin(Pos.X/6)*5);
             if (Pos.X < -Size.Width)
             {
-                Respawn();
+                Respawn(Game.GenerateRandomPointBehindScreen());
             }
         }
         /// <summary>
         /// Метод "оживления" противника
         /// </summary>
-        public override void Respawn()
+        public override void Respawn(Point newPoint)
         {
-            Pos.X = Game.Width + Size.Width;
-            Pos.Y = Game._random.Next(0, Game.Height);
+            base.Respawn(newPoint);
         }
     }
 }
