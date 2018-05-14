@@ -115,7 +115,7 @@ namespace HW_Asteroids
         public static Point GenerateRandomPointBehindScreen()
         {
             var posX = Width + _random.Next(0, Width);
-            var posY = _random.Next(50, Height - 50);
+            var posY = _random.Next(0, Height);
             return new Point(posX, posY);
         }
         /// <summary>

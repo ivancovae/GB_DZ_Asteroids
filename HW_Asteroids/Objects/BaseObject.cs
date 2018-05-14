@@ -39,6 +39,14 @@ namespace HW_Asteroids
         {
             _tag = tag;
             Pos = pos;
+            if (Pos.Y < 0)
+            {
+                Pos.Y = 0;
+            }
+            if(Pos.Y + size.Height > Game.Height)
+            {
+                Pos.Y = Game.Height - size.Height;
+            }
             Dir = dir;
             // to do убрать после домашнего задания
             // проверка должна быть не через исключения, а проверкой и заданием минимального размера, например (1px)х(1px)
